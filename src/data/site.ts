@@ -44,9 +44,15 @@ export const about = {
   story: {
     eyebrow: "Why \"Creer\"",
     heading: "To create, to believe.",
+    definition: {
+      word: "Créer",
+      pronunciation: "[kRee]",
+      partOfSpeech: "Verb",
+      body: "In French, the verb créer means \"to create.\" Additionally, it means to design, generate, produce, and to invent.",
+    },
     // [PLACEHOLDER — replace with the owner's real story in her own words]
     body: [
-      "Creer started in a small home kitchen with a stand mixer, a stack of mismatched cooling racks, and a lot of hopeful late-night baking. The name comes from the French créer — to create — a reminder that every batch is a small act of making.",
+      "Creer started in a small home kitchen with a stand mixer, a stack of mismatched cooling racks, and a lot of hopeful late-night baking. The name is a reminder that every batch is a small act of making.",
       "What began as gifts for friends and family turned into orders from neighbors, and then friends of neighbors, and here we are. Still one person, still one oven, baking the way you'd bake for someone you love.",
     ],
   },

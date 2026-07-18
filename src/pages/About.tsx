@@ -28,10 +28,26 @@ export function About() {
           <Reveal>
             <Eyebrow>{about.story.eyebrow}</Eyebrow>
             <h2>{about.story.heading}</h2>
-            <p className="mt-2 text-xs italic text-[color:var(--color-taupe)]">
+          </Reveal>
+
+          <Reveal delay={80} className="mt-6 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-cream)] px-6 py-5 sm:px-8">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span className="font-heading text-2xl italic text-[color:var(--color-sage-deep)] sm:text-3xl">
+                {about.story.definition.word}
+              </span>
+              <span className="text-sm text-[color:var(--color-taupe)]">{about.story.definition.pronunciation}</span>
+              <span className="text-xs font-medium uppercase tracking-wide text-[color:var(--color-rose)]">
+                {about.story.definition.partOfSpeech}
+              </span>
+            </div>
+            <p className="mt-3 text-[15px] sm:text-base">{about.story.definition.body}</p>
+          </Reveal>
+
+          <Reveal delay={140}>
+            <p className="mt-6 text-xs italic text-[color:var(--color-taupe)]">
               [Placeholder — replace with the owner's real story in her own words]
             </p>
-            <div className="mt-5 space-y-4 text-[15px] sm:text-base">
+            <div className="mt-3 space-y-4 text-[15px] sm:text-base">
               {about.story.body.map((paragraph) => (
                 <p key={paragraph.slice(0, 20)}>{paragraph}</p>
               ))}

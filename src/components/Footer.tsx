@@ -1,34 +1,28 @@
-import { NavLink } from "react-router-dom";
-import { business, footer, nav } from "../data/site";
+import { business, footer } from "../data/site";
 import { photoSources } from "../data/photoSources";
 
+/**
+ * No nav links here on purpose — the header nav is present on every page,
+ * so repeating it in the footer would just be redundant. This stays a
+ * simple sign-off: who this is, and how to reach them.
+ */
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-[color:var(--color-border)] bg-[color:var(--color-cream-soft)]">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 sm:px-8 md:flex-row md:justify-between">
-        <div className="max-w-xs">
-          <img src={photoSources.logo} alt={business.name} className="h-12 w-12 rounded-full object-cover" />
-          <p className="mt-3 text-lg font-medium text-[color:var(--color-sage-deep)]">{business.name}</p>
-          <p className="mt-2 text-sm text-[color:var(--color-taupe)]">{footer.tagline}</p>
-          <a
-            href={business.instagramUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-block text-sm underline decoration-[color:var(--color-rose)] underline-offset-4"
-          >
-            {business.instagramHandle}
-          </a>
-        </div>
-
-        <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-          {nav.map((item) => (
-            <NavLink key={item.href} to={item.href} className="text-[color:var(--color-cocoa)] hover:text-[color:var(--color-sage-deep)]">
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+      <div className="flex max-w-xs flex-col px-5 py-12 sm:px-8 lg:px-12 xl:px-20">
+        <img src={photoSources.logo} alt={business.name} className="h-12 w-12 rounded-full object-cover" />
+        <p className="mt-3 text-lg font-medium text-[color:var(--color-sage-deep)]">{business.name}</p>
+        <p className="mt-2 text-sm text-[color:var(--color-taupe)]">{footer.tagline}</p>
+        <a
+          href={business.instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-block text-sm underline decoration-[color:var(--color-rose)] underline-offset-4"
+        >
+          {business.instagramHandle}
+        </a>
       </div>
 
       <div className="border-t border-[color:var(--color-border)] px-5 py-5 text-center text-xs text-[color:var(--color-taupe)] sm:px-8">

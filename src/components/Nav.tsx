@@ -25,7 +25,7 @@ export function Nav() {
         scrolled ? "border-[color:var(--color-border)] shadow-sm" : "border-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-8">
+      <div className="mx-auto flex items-center justify-between px-5 py-3 sm:px-8 lg:px-12 xl:px-20">
         <NavLink to="/" className="flex items-center gap-2 transition-transform duration-200 active:scale-95">
           <img src={photoSources.logo} alt={business.name} className="h-10 w-10 rounded-full object-cover" />
           <span className="sr-only">{business.name}</span>
