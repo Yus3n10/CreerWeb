@@ -24,7 +24,7 @@ interface CtaProps {
 /** A single shared CTA style so every button on the site looks the same. */
 export function Cta({ to, children, variant = "primary", external = false, className = "" }: CtaProps) {
   const base =
-    "inline-flex min-h-11 items-center justify-center rounded-full px-6 py-2.5 text-sm font-medium transition-colors duration-200";
+    "inline-flex min-h-11 items-center justify-center rounded-full px-6 py-2.5 text-sm font-medium transition-[background-color,color,transform] duration-200 active:scale-95";
   const styles =
     variant === "primary"
       ? "bg-[color:var(--color-sage-deep)] text-[color:var(--color-cream)] hover:bg-[color:var(--color-sage)]"

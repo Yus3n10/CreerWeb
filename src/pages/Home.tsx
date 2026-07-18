@@ -1,6 +1,7 @@
 import { Container, Cta, Eyebrow } from "../components/ui";
 import { PhotoSlot } from "../components/PhotoSlot";
 import { SectionDivider } from "../components/SectionDivider";
+import { Reveal } from "../components/Reveal";
 import { business, home } from "../data/site";
 import { menu, featuredItems } from "../data/menu";
 import { photoSources } from "../data/photoSources";
@@ -16,7 +17,7 @@ export function Home() {
     <>
       <section className="bg-[color:var(--color-cream)] pb-16 pt-12 sm:pb-20 sm:pt-16">
         <Container className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-          <div>
+          <Reveal>
             <Eyebrow>{home.eyebrow}</Eyebrow>
             <h1 className="text-[color:var(--color-sage-deep)]">{home.heading}</h1>
             <p className="mt-5 text-[15px] text-[color:var(--color-cocoa)] sm:text-base">{home.intro}</p>
@@ -26,8 +27,10 @@ export function Home() {
                 Order on Instagram
               </Cta>
             </div>
-          </div>
-          <PhotoSlot imageId="heroPhoto" src={photoSources.heroPhoto} torn priority className="w-full" />
+          </Reveal>
+          <Reveal delay={120}>
+            <PhotoSlot imageId="heroPhoto" src={photoSources.heroPhoto} torn priority className="w-full" />
+          </Reveal>
         </Container>
       </section>
 
@@ -35,12 +38,14 @@ export function Home() {
 
       <section className="bg-[color:var(--color-cream-soft)] py-14 sm:py-20">
         <Container className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
-          <PhotoSlot imageId="kitchenPhoto" className="w-full md:order-2" />
-          <div className="md:order-1">
+          <Reveal className="md:order-2">
+            <PhotoSlot imageId="kitchenPhoto" className="w-full" />
+          </Reveal>
+          <Reveal className="md:order-1">
             <Eyebrow>{home.kitchen.eyebrow}</Eyebrow>
             <h2>Our little kitchen</h2>
             <p className="mt-4 text-[15px] sm:text-base">{home.kitchen.body}</p>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -48,7 +53,7 @@ export function Home() {
 
       <section className="bg-[color:var(--color-cream)] py-14 sm:py-20">
         <Container>
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+          <Reveal className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <div>
               <Eyebrow>{home.featured.eyebrow}</Eyebrow>
               <h2>{home.featured.heading}</h2>
@@ -56,12 +61,17 @@ export function Home() {
             <Cta to="/menu" variant="secondary">
               See the full menu
             </Cta>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-            {featured.map((item) => (
-              <div key={item.name} className="flex flex-col gap-3">
-                <PhotoSlot imageId={item.imageId} src={photoSources[item.imageId]} className="w-full" />
+            {featured.map((item, i) => (
+              <Reveal key={item.name} delay={i * 70} className="group flex flex-col gap-3">
+                <PhotoSlot
+                  imageId={item.imageId}
+                  src={photoSources[item.imageId]}
+                  zoomOnHover
+                  className="w-full shadow-sm transition-shadow duration-300 group-hover:shadow-md"
+                />
                 <div>
                   <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--color-rose)]">
                     {item.tag}
@@ -71,7 +81,7 @@ export function Home() {
                   </h3>
                   <p className="mt-1 text-sm text-[color:var(--color-taupe)]">from {item.pricing[0].price}</p>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -81,18 +91,25 @@ export function Home() {
 
       <section className="bg-[color:var(--color-sage-deep)] py-14 text-[color:var(--color-cream)] sm:py-20">
         <Container className="text-center">
-          <p className="mb-2 text-xs font-medium uppercase tracking-[0.14em] text-[color:var(--color-rose)]">
-            {home.closing.eyebrow}
-          </p>
-          <h2 className="text-[color:var(--color-cream)]">{home.closing.heading}</h2>
-          <p className="mx-auto mt-4 max-w-md text-[15px] text-[color:var(--color-cream)]/85 sm:text-base">
-            {home.closing.body}
-          </p>
-          <div className="mt-7">
-            <Cta to={business.instagramUrl} external variant="secondary" className="!border-[color:var(--color-cream)] !text-[color:var(--color-cream)] hover:!bg-[color:var(--color-cream)] hover:!text-[color:var(--color-sage-deep)]">
-              Message us · {business.instagramHandle}
-            </Cta>
-          </div>
+          <Reveal>
+            <p className="mb-2 text-xs font-medium uppercase tracking-[0.14em] text-[color:var(--color-rose)]">
+              {home.closing.eyebrow}
+            </p>
+            <h2 className="text-[color:var(--color-cream)]">{home.closing.heading}</h2>
+            <p className="mx-auto mt-4 max-w-md text-[15px] text-[color:var(--color-cream)]/85 sm:text-base">
+              {home.closing.body}
+            </p>
+            <div className="mt-7">
+              <Cta
+                to={business.instagramUrl}
+                external
+                variant="secondary"
+                className="!border-[color:var(--color-cream)] !text-[color:var(--color-cream)] hover:!bg-[color:var(--color-cream)] hover:!text-[color:var(--color-sage-deep)]"
+              >
+                Message us · {business.instagramHandle}
+              </Cta>
+            </div>
+          </Reveal>
         </Container>
       </section>
     </>

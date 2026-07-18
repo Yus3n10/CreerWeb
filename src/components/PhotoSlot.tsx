@@ -12,6 +12,8 @@ interface PhotoSlotProps {
   torn?: boolean;
   /** Set for above-the-fold images (e.g. a page hero) so they load eagerly instead of lazily. */
   priority?: boolean;
+  /** Gently scale the image on hover of an ancestor with the `group` class. */
+  zoomOnHover?: boolean;
 }
 
 /**
@@ -20,7 +22,14 @@ interface PhotoSlotProps {
  * 2. `src` provided, still loading -> a skeleton pulse (prevents layout shift).
  * 3. `src` loaded -> the real photo, faded in.
  */
-export function PhotoSlot({ imageId, src, className = "", torn = false, priority = false }: PhotoSlotProps) {
+export function PhotoSlot({
+  imageId,
+  src,
+  className = "",
+  torn = false,
+  priority = false,
+  zoomOnHover = false,
+}: PhotoSlotProps) {
   const [loaded, setLoaded] = useState(false);
   const slot = imageSlots[imageId];
   const shapeClass = torn ? "torn-edge" : "rounded-2xl";
@@ -61,9 +70,9 @@ export function PhotoSlot({ imageId, src, className = "", torn = false, priority
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
         onLoad={() => setLoaded(true)}
-        className={`h-full w-full object-cover transition-opacity duration-300 ${
+        className={`h-full w-full object-cover transition-[opacity,transform] duration-300 ${
           loaded ? "opacity-100" : "opacity-0"
-        }`}
+        } ${zoomOnHover ? "group-hover:scale-105" : ""}`}
       />
     </div>
   );

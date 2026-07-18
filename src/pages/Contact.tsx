@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { Container, Eyebrow } from "../components/ui";
+import { Reveal } from "../components/Reveal";
 import { business, contact } from "../data/site";
 
 const LIMITS = {
@@ -68,15 +69,17 @@ export function Contact() {
     <>
       <section className="bg-[color:var(--color-cream)] pb-14 pt-12 sm:pb-20 sm:pt-16">
         <Container>
-          <Eyebrow>{contact.eyebrow}</Eyebrow>
-          <h1 className="max-w-xl text-[color:var(--color-sage-deep)]">{contact.heading}</h1>
-          <p className="mt-4 max-w-xl text-[15px] sm:text-base">{contact.intro}</p>
+          <Reveal>
+            <Eyebrow>{contact.eyebrow}</Eyebrow>
+            <h1 className="max-w-xl text-[color:var(--color-sage-deep)]">{contact.heading}</h1>
+            <p className="mt-4 max-w-xl text-[15px] sm:text-base">{contact.intro}</p>
+          </Reveal>
         </Container>
       </section>
 
       <section className="bg-[color:var(--color-cream)] pb-16 sm:pb-20">
         <Container className="grid gap-8 md:grid-cols-2 md:gap-10">
-          <div className="rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-cream-soft)] p-6 sm:p-8">
+          <Reveal className="rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-cream-soft)] p-6 transition-shadow duration-300 hover:shadow-md sm:p-8">
             <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--color-rose)]">
               The best way
             </p>
@@ -96,16 +99,19 @@ export function Contact() {
               <p className="mt-2 text-sm">{contact.location}</p>
               <p className="mt-2 text-sm text-[color:var(--color-taupe)]">{contact.locationBody}</p>
             </div>
-          </div>
+          </Reveal>
 
-          <div className="rounded-2xl border border-[color:var(--color-border)] p-6 sm:p-8">
+          <Reveal delay={100} className="rounded-2xl border border-[color:var(--color-border)] p-6 transition-shadow duration-300 hover:shadow-md sm:p-8">
             <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--color-taupe)]">
               Questions? Send us a message
             </p>
             <p className="mt-2 text-sm text-[color:var(--color-cocoa)]">{contact.formNote}</p>
 
             {status === "success" ? (
-              <div role="status" className="mt-6 rounded-xl bg-[color:var(--color-sage)]/15 p-4 text-sm text-[color:var(--color-sage-deep)]">
+              <div
+                role="status"
+                className="animate-pop-in mt-6 rounded-xl bg-[color:var(--color-sage)]/15 p-4 text-sm text-[color:var(--color-sage-deep)]"
+              >
                 Thanks — your message is in. We'll get back to you soon.
               </div>
             ) : (
@@ -166,7 +172,7 @@ export function Contact() {
                 </div>
 
                 {errorMessage && (
-                  <p role="alert" className="text-sm text-[#a13d3d]">
+                  <p role="alert" className="animate-pop-in text-sm text-[#a13d3d]">
                     {errorMessage}
                   </p>
                 )}
@@ -174,13 +180,13 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="mt-1 inline-flex min-h-11 items-center justify-center rounded-full bg-[color:var(--color-sage-deep)] px-6 py-2.5 text-sm font-medium text-[color:var(--color-cream)] transition-colors hover:bg-[color:var(--color-sage)] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="mt-1 inline-flex min-h-11 items-center justify-center rounded-full bg-[color:var(--color-sage-deep)] px-6 py-2.5 text-sm font-medium text-[color:var(--color-cream)] transition-[background-color,transform] duration-200 hover:bg-[color:var(--color-sage)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100"
                 >
                   {status === "submitting" ? "Sending…" : "Send message"}
                 </button>
               </form>
             )}
-          </div>
+          </Reveal>
         </Container>
       </section>
     </>
