@@ -26,13 +26,13 @@ export function Menu() {
 
       <Tabs defaultValue={menu[0].id} className="gap-0">
         <div className="sticky top-[57px] z-30 border-y border-[color:var(--color-border)] bg-[color:var(--color-cream)]/95 backdrop-blur-sm sm:top-[65px]">
-          <Container className="py-3">
-            <TabsList className="h-auto w-full flex-wrap justify-start gap-1.5 rounded-full bg-[color:var(--color-cream-soft)] p-1.5">
+          <Container className="overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <TabsList className="!h-auto w-fit flex-nowrap justify-start gap-1.5 rounded-full bg-[color:var(--color-cream-soft)] p-1.5">
               {menu.map((category) => (
                 <TabsTrigger
                   key={category.id}
                   value={category.id}
-                  className="rounded-full px-4 py-2 text-sm font-medium text-[color:var(--color-cocoa)] transition-colors data-active:bg-[color:var(--color-sage-deep)] data-active:text-[color:var(--color-cream)] data-active:shadow-none"
+                  className="shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-[color:var(--color-cocoa)] transition-colors data-active:bg-[color:var(--color-sage-deep)] data-active:text-[color:var(--color-cream)] data-active:shadow-none"
                 >
                   {category.name}
                 </TabsTrigger>
@@ -72,7 +72,7 @@ export function Menu() {
         ))}
       </Tabs>
 
-      <SectionDivider fill="var(--color-sage-deep)" />
+      <SectionDivider from="var(--color-cream)" fill="var(--color-sage-deep)" />
 
       <section className="bg-[color:var(--color-sage-deep)] py-14 text-[color:var(--color-cream)] sm:py-20">
         <Container className="text-center">

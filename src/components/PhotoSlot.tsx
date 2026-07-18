@@ -110,7 +110,8 @@ export function PhotoSlot({
           fetchPriority={priority && i === 0 ? "high" : "auto"}
           aria-hidden={isCrossfade && i !== activeIndex}
           onLoad={() => i === 0 && setLoaded(true)}
-          className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[900ms] ${
+          style={{ willChange: "opacity" }}
+          className={`absolute inset-0 h-full w-full object-cover transition-all duration-[900ms] ${
             zoomOnHover ? "group-hover:scale-105" : ""
           } ${useIdleMotion ? "animate-ken-burns" : ""} ${
             !loaded ? "opacity-0" : isCrossfade ? (i === activeIndex ? "opacity-100" : "opacity-0") : "opacity-100"

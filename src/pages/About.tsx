@@ -21,7 +21,7 @@ export function About() {
         </Container>
       </section>
 
-      <SectionDivider fill="var(--color-cream-soft)" />
+      <SectionDivider from="var(--color-cream)" fill="var(--color-cream-soft)" />
 
       <section className="bg-[color:var(--color-cream-soft)] py-14 sm:py-20">
         <Container className="max-w-3xl">
@@ -40,7 +40,7 @@ export function About() {
         </Container>
       </section>
 
-      <SectionDivider fill="var(--color-cream)" />
+      <SectionDivider from="var(--color-cream-soft)" fill="var(--color-cream)" />
 
       <section className="bg-[color:var(--color-cream)] py-14 sm:py-20">
         <Container>
@@ -69,7 +69,7 @@ export function About() {
         </Container>
       </section>
 
-      <SectionDivider fill="var(--color-sage-deep)" />
+      <SectionDivider from="var(--color-cream)" fill="var(--color-sage-deep)" />
 
       <section className="bg-[color:var(--color-sage-deep)] py-14 text-[color:var(--color-cream)] sm:py-20">
         <Container className="text-center">

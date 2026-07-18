@@ -1,4 +1,4 @@
-import logo from "../assets/images/logo.jpg";
+import logo from "../assets/images/logo.png";
 import heroPhoto from "../assets/images/brownies-hero.jpg";
 import fudgeBrownie from "../assets/images/brownies-menu.jpg";
 import fudgeBrownieCloseup from "../assets/images/brownies-closeup-2.jpg";
