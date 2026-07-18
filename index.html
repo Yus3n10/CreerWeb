@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Creer is a home-based bakery baking cookies, brownies, and brookies to order. Pre-order for pickup or delivery."
+    />
+    <title>Creer — Small-batch home bakery, made to order</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!--
+      Netlify's build-time crawler only reads static HTML, not the
+      client-rendered React form on /contact — so this hidden duplicate
+      (same name + fields) is what registers the form with Netlify. It is
+      never shown to a real visitor; the visible form on /contact posts to
+      it via fetch. See src/pages/Contact.tsx.
+    -->
+    <form name="contact" data-netlify="true" netlify-honeypot="company" hidden>
+      <input type="text" name="name" />
+      <input type="text" name="reachBack" />
+      <textarea name="message"></textarea>
+      <input type="text" name="company" />
+    </form>
+  </body>
+</html>

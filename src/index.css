@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap');
+@import "tailwindcss";
+
+/*
+  One typeface, used deliberately: Fraunces is a variable serif with a wide
+  optical-size + weight range, so headings (high opsz, heavier weight) and
+  body copy (low opsz, regular weight) come from the same family instead of
+  stacking multiple fonts.
+*/
+
+@theme {
+  --font-sans: "Fraunces", ui-serif, Georgia, serif;
+
+  --color-cream: #f6f1e7;
+  --color-cream-soft: #efe8d8;
+  --color-sage: #7a8768;
+  --color-sage-deep: #4b5540;
+  --color-rose: #c9a2a0;
+  --color-cocoa: #5b4636;
+  --color-taupe: #8c7c68;
+  --color-border: #e4dcc8;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-cream);
+    color: var(--color-cocoa);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-optical-sizing: auto;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-sage-deep);
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 1.7rem + 2.5vw, 3.75rem);
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+  }
+
+  h3 {
+    font-size: 1.375rem;
+  }
+
+  p {
+    max-width: 65ch;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sage-deep);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Signature torn-paper edge, used on the hero photo only. */
+  .torn-edge {
+    clip-path: polygon(
+      0% 3%, 4% 0%, 9% 2%, 15% 0%, 21% 1.6%, 28% 0%, 35% 2%, 42% 0%, 49% 1.3%,
+      56% 0%, 63% 1.8%, 70% 0%, 77% 1.3%, 84% 0%, 91% 2%, 96% 0%, 100% 2.5%,
+      100% 97%, 95% 100%, 90% 98%, 84% 100%, 78% 98.6%, 71% 100%, 64% 98.2%,
+      57% 100%, 50% 98.6%, 43% 100%, 36% 98%, 29% 100%, 22% 98.4%, 15% 100%,
+      9% 98.2%, 4% 100%, 0% 97.5%
+    );
+  }
+}
