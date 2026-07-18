@@ -139,10 +139,16 @@ export const menu: MenuCategory[] = [
   },
 ];
 
-/** Products featured on the homepage — reference by category id + item name. */
+/**
+ * Products featured on the homepage — reference by category id + item name.
+ * Chosen because each has 2+ real photo angles (see photoAngles in
+ * photoSources.ts), so their homepage cards crossfade instead of sitting
+ * static. Signature Brookie only has one photo, so it stays off this list
+ * for now (it's still on the full Menu page).
+ */
 export const featuredItems = [
+  { categoryId: "cookies", itemName: "Ube" },
   { categoryId: "cookies", itemName: "Biscoff" },
   { categoryId: "brownies", itemName: "Classic Fudge Brownie" },
-  { categoryId: "brookies", itemName: "Signature Brookie" },
   { categoryId: "cakes", itemName: "Carrot Cake" },
 ];

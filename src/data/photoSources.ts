@@ -1,14 +1,18 @@
 import logo from "../assets/images/logo.jpg";
 import heroPhoto from "../assets/images/brownies-hero.jpg";
 import fudgeBrownie from "../assets/images/brownies-menu.jpg";
+import fudgeBrownieCloseup from "../assets/images/brownies-closeup-2.jpg";
 import aboutHero from "../assets/images/about-hero.jpg";
 import behindScenes1 from "../assets/images/behind-scenes-1.jpg";
 import behindScenes2 from "../assets/images/behind-scenes-2.jpg";
 import biscoffCookie from "../assets/images/biscoff-cookie.jpg";
+import biscoffCookie2 from "../assets/images/biscoff-cookie-2.jpg";
 import signatureBrookie from "../assets/images/signature-brookie.jpg";
 import carrotCake from "../assets/images/carrot-cake-menu.jpg";
+import carrotCake2 from "../assets/images/carrot-cake-2.jpg";
 import bananaBread from "../assets/images/banana-bread-menu.jpg";
 import ubeCookie from "../assets/images/ube-cookie.jpg";
+import ubeCookie2 from "../assets/images/ube-cookie-2.jpg";
 
 /**
  * Real photos the owner has provided, keyed by the same imageId used in
@@ -28,4 +32,17 @@ export const photoSources: Record<string, string> = {
   carrotCake,
   bananaBread,
   ubeCookie,
+};
+
+/**
+ * Products with more than one real photo — <PhotoSlot> crossfades between
+ * these on a loop instead of showing a single static image. Only list
+ * imageIds that actually have 2+ distinct angles; everything else falls
+ * back to the single photo in `photoSources` above.
+ */
+export const photoAngles: Record<string, string[]> = {
+  biscoffCookie: [biscoffCookie, biscoffCookie2],
+  carrotCake: [carrotCake, carrotCake2],
+  fudgeBrownie: [fudgeBrownie, fudgeBrownieCloseup],
+  ubeCookie: [ubeCookie, ubeCookie2],
 };

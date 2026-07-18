@@ -4,7 +4,7 @@ import { SectionDivider } from "../components/SectionDivider";
 import { Reveal } from "../components/Reveal";
 import { business, home } from "../data/site";
 import { menu, featuredItems } from "../data/menu";
-import { photoSources } from "../data/photoSources";
+import { photoSources, photoAngles } from "../data/photoSources";
 
 export function Home() {
   const featured = featuredItems.map(({ categoryId, itemName }) => {
@@ -29,7 +29,7 @@ export function Home() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <PhotoSlot imageId="heroPhoto" src={photoSources.heroPhoto} torn priority className="w-full" />
+            <PhotoSlot imageId="heroPhoto" src={photoSources.heroPhoto} torn priority idle className="w-full" />
           </Reveal>
         </Container>
       </section>
@@ -68,7 +68,7 @@ export function Home() {
               <Reveal key={item.name} delay={i * 70} className="group flex flex-col gap-3">
                 <PhotoSlot
                   imageId={item.imageId}
-                  src={photoSources[item.imageId]}
+                  src={photoAngles[item.imageId] ?? photoSources[item.imageId]}
                   zoomOnHover
                   className="w-full shadow-sm transition-shadow duration-300 group-hover:shadow-md"
                 />

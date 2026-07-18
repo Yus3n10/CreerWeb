@@ -127,4 +127,19 @@
   .animate-pop-in {
     animation: pop-in 250ms ease-out both;
   }
+
+  /* Slow ambient zoom for single-photo slots that have no second angle to
+     crossfade with — keeps every hero-style photo gently alive. */
+  @keyframes ken-burns {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.06);
+    }
+  }
+  .animate-ken-burns {
+    animation: ken-burns 14s ease-in-out infinite;
+  }
 }

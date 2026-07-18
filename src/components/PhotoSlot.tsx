@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { imageSlots } from "../data/images";
 import { Skeleton } from "./Skeleton";
 
 interface PhotoSlotProps {
   /** Key into src/data/images.ts */
   imageId: string;
-  /** Real image URL, once the owner has provided one. Leave undefined to show the placeholder. */
-  src?: string;
+  /**
+   * Real image URL(s), once the owner has provided them. A single string
+   * shows one static photo; an array of 2+ crossfades between them on a
+   * loop (for products with multiple angles). Leave undefined to show the
+   * placeholder.
+   */
+  src?: string | string[];
   className?: string;
   /** Torn-paper style edge instead of a plain rounded rectangle. */
   torn?: boolean;
@@ -14,13 +19,20 @@ interface PhotoSlotProps {
   priority?: boolean;
   /** Gently scale the image on hover of an ancestor with the `group` class. */
   zoomOnHover?: boolean;
+  /** Slow ambient zoom loop for single-photo slots — skipped automatically when there are multiple angles (those crossfade instead). */
+  idle?: boolean;
+  /** How long each photo stays before crossfading to the next, in ms. */
+  intervalMs?: number;
 }
+
+const prefersReducedMotion = () =>
+  typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /**
  * Renders one of three states for a photo slot:
  * 1. No `src` yet -> a labeled placeholder describing exactly what image is needed.
- * 2. `src` provided, still loading -> a skeleton pulse (prevents layout shift).
- * 3. `src` loaded -> the real photo, faded in.
+ * 2. One photo -> skeleton while it loads, then fades in (optionally with a slow idle zoom).
+ * 3. Multiple photos -> all preloaded, crossfading between them on an infinite loop.
  */
 export function PhotoSlot({
   imageId,
@@ -29,12 +41,35 @@ export function PhotoSlot({
   torn = false,
   priority = false,
   zoomOnHover = false,
+  idle = false,
+  intervalMs = 3200,
 }: PhotoSlotProps) {
+  const sources = src ? (Array.isArray(src) ? src : [src]) : [];
   const [loaded, setLoaded] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const slot = imageSlots[imageId];
   const shapeClass = torn ? "torn-edge" : "rounded-2xl";
+  const isCrossfade = sources.length > 1;
+  const sourcesKey = sources.join("|");
 
-  if (!src) {
+  useEffect(() => {
+    if (!isCrossfade || prefersReducedMotion()) return;
+    const id = window.setInterval(() => {
+      setActiveIndex((i) => (i + 1) % sources.length);
+    }, intervalMs);
+    return () => window.clearInterval(id);
+  }, [isCrossfade, sources.length, intervalMs]);
+
+  // Some in-app browsers (Instagram/Facebook webviews) don't reliably fire
+  // the <img> load event even though the image itself downloads fine — same
+  // issue as the scroll-reveal fallback. Never leave the photo stuck behind
+  // the skeleton forever because of that.
+  useEffect(() => {
+    const fallback = window.setTimeout(() => setLoaded(true), 2500);
+    return () => window.clearTimeout(fallback);
+  }, [sourcesKey]);
+
+  if (sources.length === 0) {
     return (
       <div
         className={`flex flex-col items-center justify-center gap-2 border-2 border-dashed border-[color:var(--color-taupe)]/50 bg-[color:var(--color-cream-soft)] p-4 text-center ${shapeClass} ${className}`}
@@ -61,19 +96,27 @@ export function PhotoSlot({
     );
   }
 
+  const useIdleMotion = idle && !isCrossfade && !prefersReducedMotion();
+
   return (
     <div className={`relative overflow-hidden ${shapeClass} ${className}`} style={{ aspectRatio: slot.aspect }}>
       {!loaded && <Skeleton className="absolute inset-0 h-full w-full rounded-none" />}
-      <img
-        src={src}
-        alt={slot.alt}
-        loading={priority ? "eager" : "lazy"}
-        fetchPriority={priority ? "high" : "auto"}
-        onLoad={() => setLoaded(true)}
-        className={`h-full w-full object-cover transition-[opacity,transform] duration-300 ${
-          loaded ? "opacity-100" : "opacity-0"
-        } ${zoomOnHover ? "group-hover:scale-105" : ""}`}
-      />
+      {sources.map((photo, i) => (
+        <img
+          key={photo}
+          src={photo}
+          alt={i === 0 ? slot.alt : `${slot.alt} — another angle`}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority && i === 0 ? "high" : "auto"}
+          aria-hidden={isCrossfade && i !== activeIndex}
+          onLoad={() => i === 0 && setLoaded(true)}
+          className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-[900ms] ${
+            zoomOnHover ? "group-hover:scale-105" : ""
+          } ${useIdleMotion ? "animate-ken-burns" : ""} ${
+            !loaded ? "opacity-0" : isCrossfade ? (i === activeIndex ? "opacity-100" : "opacity-0") : "opacity-100"
+          }`}
+        />
+      ))}
     </div>
   );
 }
