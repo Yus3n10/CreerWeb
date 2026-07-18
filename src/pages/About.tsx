@@ -2,6 +2,7 @@ import { Container, Cta, Eyebrow } from "../components/ui";
 import { PhotoSlot } from "../components/PhotoSlot";
 import { SectionDivider } from "../components/SectionDivider";
 import { about, business } from "../data/site";
+import { photoSources } from "../data/photoSources";
 
 export function About() {
   return (
@@ -13,7 +14,7 @@ export function About() {
             <h1 className="text-[color:var(--color-sage-deep)]">{about.heading}</h1>
             <p className="mt-5 text-[15px] sm:text-base">{about.intro}</p>
           </div>
-          <PhotoSlot imageId="aboutHero" torn className="w-full" />
+          <PhotoSlot imageId="aboutHero" src={photoSources.aboutHero} torn priority className="w-full" />
         </Container>
       </section>
 
@@ -51,8 +52,8 @@ export function About() {
           </div>
 
           <div className="mt-10 grid grid-cols-2 gap-4 sm:max-w-lg">
-            <PhotoSlot imageId="behindScenes1" className="w-full" />
-            <PhotoSlot imageId="behindScenes2" className="w-full" />
+            <PhotoSlot imageId="behindScenes1" src={photoSources.behindScenes1} className="w-full" />
+            <PhotoSlot imageId="behindScenes2" src={photoSources.behindScenes2} className="w-full" />
           </div>
         </Container>
       </section>

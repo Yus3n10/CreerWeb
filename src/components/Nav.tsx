@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { business, nav } from "../data/site";
+import { photoSources } from "../data/photoSources";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -13,14 +14,9 @@ export function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-[color:var(--color-border)] bg-[color:var(--color-cream)]/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-8">
-        <NavLink to="/" className="flex items-center gap-2 text-lg font-medium text-[color:var(--color-sage-deep)]">
-          <span
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-[color:var(--color-sage-deep)] text-base italic"
-            aria-hidden="true"
-          >
-            c
-          </span>
-          {business.name}
+        <NavLink to="/" className="flex items-center gap-2">
+          <img src={photoSources.logo} alt={business.name} className="h-10 w-10 rounded-full object-cover" />
+          <span className="sr-only">{business.name}</span>
         </NavLink>
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="Primary">

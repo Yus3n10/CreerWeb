@@ -3,6 +3,7 @@ import { PhotoSlot } from "../components/PhotoSlot";
 import { SectionDivider } from "../components/SectionDivider";
 import { business, home } from "../data/site";
 import { menu, featuredItems } from "../data/menu";
+import { photoSources } from "../data/photoSources";
 
 export function Home() {
   const featured = featuredItems.map(({ categoryId, itemName }) => {
@@ -26,7 +27,7 @@ export function Home() {
               </Cta>
             </div>
           </div>
-          <PhotoSlot imageId="heroPhoto" torn className="w-full" />
+          <PhotoSlot imageId="heroPhoto" src={photoSources.heroPhoto} torn priority className="w-full" />
         </Container>
       </section>
 
@@ -60,7 +61,7 @@ export function Home() {
           <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
             {featured.map((item) => (
               <div key={item.name} className="flex flex-col gap-3">
-                <PhotoSlot imageId={item.imageId} className="w-full" />
+                <PhotoSlot imageId={item.imageId} src={photoSources[item.imageId]} className="w-full" />
                 <div>
                   <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--color-rose)]">
                     {item.tag}

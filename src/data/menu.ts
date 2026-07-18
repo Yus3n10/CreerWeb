@@ -56,6 +56,17 @@ export const menu: MenuCategory[] = [
           { label: "Dozen", price: "₱XXX" },
         ],
       },
+      {
+        name: "Ube",
+        tag: "Favorite",
+        description: "Ube-rich, white chocolate chunks.",
+        imageId: "ubeCookie",
+        pricing: [
+          { label: "Per piece", price: "₱XX" },
+          { label: "Half dozen", price: "₱XXX" },
+          { label: "Dozen", price: "₱XXX" },
+        ],
+      },
     ],
   },
   {
@@ -98,12 +109,40 @@ export const menu: MenuCategory[] = [
       },
     ],
   },
+  {
+    id: "cakes",
+    name: "Cakes & Loaves",
+    tagline: "Sliced & shared",
+    items: [
+      {
+        name: "Carrot Cake",
+        tag: "Favorite",
+        description: "Spiced carrot cake bars, piped cream cheese frosting.",
+        imageId: "carrotCake",
+        pricing: [
+          { label: "Per piece", price: "₱XX" },
+          { label: "Box of 4", price: "₱XXX" },
+        ],
+      },
+      {
+        name: "Banana Bread",
+        tag: "Classic",
+        description: "Moist banana bread with cinnamon cream cheese frosting.",
+        imageId: "bananaBread",
+        pricing: [
+          { label: "Per slice", price: "₱XX" },
+          { label: "Half loaf", price: "₱XXX" },
+          { label: "Whole loaf", price: "₱XXX" },
+        ],
+      },
+    ],
+  },
 ];
 
 /** Products featured on the homepage — reference by category id + item name. */
 export const featuredItems = [
-  { categoryId: "cookies", itemName: "Chocolate Chip" },
-  { categoryId: "cookies", itemName: "Matcha" },
+  { categoryId: "cookies", itemName: "Biscoff" },
   { categoryId: "brownies", itemName: "Classic Fudge Brownie" },
   { categoryId: "brookies", itemName: "Signature Brookie" },
+  { categoryId: "cakes", itemName: "Carrot Cake" },
 ];

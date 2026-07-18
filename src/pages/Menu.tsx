@@ -3,6 +3,7 @@ import { PhotoSlot } from "../components/PhotoSlot";
 import { SectionDivider } from "../components/SectionDivider";
 import { business } from "../data/site";
 import { menu } from "../data/menu";
+import { photoSources } from "../data/photoSources";
 import type { MenuItem } from "../lib/types";
 
 const sectionBg = ["var(--color-cream)", "var(--color-cream-soft)"];
@@ -74,7 +75,7 @@ export function Menu() {
 function MenuItemCard({ item }: { item: MenuItem }) {
   return (
     <div className="flex flex-col gap-4 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-cream)] p-4 sm:flex-row sm:gap-5">
-      <PhotoSlot imageId={item.imageId} className="w-full sm:w-36 sm:shrink-0" />
+      <PhotoSlot imageId={item.imageId} src={photoSources[item.imageId]} className="w-full sm:w-36 sm:shrink-0" />
       <div className="flex-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[color:var(--color-rose)]">{item.tag}</p>
         <h3 className="mt-1 text-[color:var(--color-sage-deep)]">{item.name}</h3>

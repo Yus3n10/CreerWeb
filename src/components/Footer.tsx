@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { business, footer, nav } from "../data/site";
+import { photoSources } from "../data/photoSources";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -8,7 +9,8 @@ export function Footer() {
     <footer className="border-t border-[color:var(--color-border)] bg-[color:var(--color-cream-soft)]">
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 sm:px-8 md:flex-row md:justify-between">
         <div className="max-w-xs">
-          <p className="text-lg font-medium text-[color:var(--color-sage-deep)]">{business.name}</p>
+          <img src={photoSources.logo} alt={business.name} className="h-12 w-12 rounded-full object-cover" />
+          <p className="mt-3 text-lg font-medium text-[color:var(--color-sage-deep)]">{business.name}</p>
           <p className="mt-2 text-sm text-[color:var(--color-taupe)]">{footer.tagline}</p>
           <a
             href={business.instagramUrl}

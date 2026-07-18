@@ -83,4 +83,22 @@ export const imageSlots: Record<string, ImageSlot> = {
     aspect: "1 / 1",
     alt: "Behind the scenes at Creer",
   },
+  ubeCookie: {
+    id: "ubeCookie",
+    needed: "Photo of the Ube cookie.",
+    aspect: "1 / 1",
+    alt: "Ube white chocolate cookie",
+  },
+  carrotCake: {
+    id: "carrotCake",
+    needed: "Photo of the Carrot Cake bars.",
+    aspect: "1 / 1",
+    alt: "Carrot cake bar with cream cheese frosting",
+  },
+  bananaBread: {
+    id: "bananaBread",
+    needed: "Photo of the Banana Bread.",
+    aspect: "1 / 1",
+    alt: "Banana bread slice with cinnamon cream cheese frosting",
+  },
 };

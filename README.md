@@ -25,14 +25,19 @@ change flavors, prices, or copy here without touching any component:
 
 Every photo on the site is a labeled placeholder until a real image is
 provided — see `src/data/images.ts` for the full list of what's needed and
-in what aspect ratio. To swap one in:
+in what aspect ratio (the ones without a photo yet still show that label on
+the live site). To add or swap one in:
 
-1. Drop the image file in `src/assets/` (create the folder if it doesn't exist).
-2. Import it in the page that uses it and pass it as the `src` prop on the
-   matching `<PhotoSlot imageId="..." src={yourImage} />`.
+1. Drop the image file in `src/assets/images/`.
+2. Import it and add it to the map in `src/data/photoSources.ts`, keyed by
+   the same `imageId` used in `src/data/images.ts` and in the menu item's
+   `imageId` field.
 
-The placeholder shows a skeleton loader while the real image loads, then
-fades it in — no layout shift.
+That's it — every `<PhotoSlot imageId="...">` on every page reads from that
+one map, so nothing else needs to change. The placeholder shows a skeleton
+loader while the real image loads, then fades it in — no layout shift.
+Above-the-fold images (page heroes) pass `priority` to `PhotoSlot` so they
+load immediately instead of lazily.
 
 ## Deploying
 
