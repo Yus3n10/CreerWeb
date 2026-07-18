@@ -2,6 +2,7 @@ import { Container, Cta, Eyebrow } from "../components/ui";
 import { PhotoSlot } from "../components/PhotoSlot";
 import { SectionDivider } from "../components/SectionDivider";
 import { Reveal } from "../components/Reveal";
+import { Gallery } from "../components/Gallery";
 import { business, home } from "../data/site";
 import { menu, featuredItems } from "../data/menu";
 import { photoSources, photoAngles } from "../data/photoSources";
@@ -84,6 +85,18 @@ export function Home() {
               </Reveal>
             ))}
           </div>
+        </Container>
+      </section>
+
+      <SectionDivider fill="var(--color-cream-soft)" />
+
+      <section className="bg-[color:var(--color-cream-soft)] py-14 sm:py-20">
+        <Container>
+          <Reveal className="mb-8 text-center">
+            <Eyebrow>A peek inside</Eyebrow>
+            <h2>From the oven.</h2>
+          </Reveal>
+          <Gallery />
         </Container>
       </section>
 

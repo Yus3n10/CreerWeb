@@ -2,12 +2,11 @@ import { Container, Cta, Eyebrow } from "../components/ui";
 import { PhotoSlot } from "../components/PhotoSlot";
 import { SectionDivider } from "../components/SectionDivider";
 import { Reveal } from "../components/Reveal";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { business } from "../data/site";
 import { menu } from "../data/menu";
-import { photoSources } from "../data/photoSources";
+import { photoSources, photoAngles } from "../data/photoSources";
 import type { MenuItem } from "../lib/types";
-
-const sectionBg = ["var(--color-cream)", "var(--color-cream-soft)"];
 
 export function Menu() {
   return (
@@ -25,32 +24,53 @@ export function Menu() {
         </Container>
       </section>
 
-      {menu.map((category, i) => (
-        <div key={category.id}>
-          <SectionDivider fill={sectionBg[i % 2]} />
-          <section className="py-12 sm:py-16" style={{ backgroundColor: sectionBg[i % 2] }}>
-            <Container>
-              <Reveal className="mb-8">
-                <Eyebrow>{category.tagline}</Eyebrow>
-                <h2>{category.name}</h2>
-                {category.note && (
-                  <p className="mt-2 text-xs font-medium uppercase tracking-wide text-[color:var(--color-taupe)]">
-                    {category.note}
-                  </p>
-                )}
-              </Reveal>
-
-              <div className="grid gap-8 sm:grid-cols-2">
-                {category.items.map((item, itemIndex) => (
-                  <Reveal key={item.name} delay={Math.min(itemIndex, 3) * 70}>
-                    <MenuItemCard item={item} />
-                  </Reveal>
-                ))}
-              </div>
-            </Container>
-          </section>
+      <Tabs defaultValue={menu[0].id} className="gap-0">
+        <div className="sticky top-[57px] z-30 border-y border-[color:var(--color-border)] bg-[color:var(--color-cream)]/95 backdrop-blur-sm sm:top-[65px]">
+          <Container className="py-3">
+            <TabsList className="h-auto w-full flex-wrap justify-start gap-1.5 rounded-full bg-[color:var(--color-cream-soft)] p-1.5">
+              {menu.map((category) => (
+                <TabsTrigger
+                  key={category.id}
+                  value={category.id}
+                  className="rounded-full px-4 py-2 text-sm font-medium text-[color:var(--color-cocoa)] transition-colors data-active:bg-[color:var(--color-sage-deep)] data-active:text-[color:var(--color-cream)] data-active:shadow-none"
+                >
+                  {category.name}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Container>
         </div>
-      ))}
+
+        {menu.map((category) => (
+          <TabsContent key={category.id} value={category.id} className="outline-none">
+            <section className="bg-[color:var(--color-cream)] py-10 sm:py-14">
+              <Container>
+                <div className="animate-pop-in mb-8">
+                  <Eyebrow>{category.tagline}</Eyebrow>
+                  <h2>{category.name}</h2>
+                  {category.note && (
+                    <p className="mt-2 text-xs font-medium uppercase tracking-wide text-[color:var(--color-taupe)]">
+                      {category.note}
+                    </p>
+                  )}
+                </div>
+
+                <div className="grid gap-8 sm:grid-cols-2">
+                  {category.items.map((item, itemIndex) => (
+                    <div
+                      key={item.name}
+                      className="animate-pop-in"
+                      style={{ animationDelay: `${Math.min(itemIndex, 3) * 60}ms` }}
+                    >
+                      <MenuItemCard item={item} />
+                    </div>
+                  ))}
+                </div>
+              </Container>
+            </section>
+          </TabsContent>
+        ))}
+      </Tabs>
 
       <SectionDivider fill="var(--color-sage-deep)" />
 
@@ -86,7 +106,7 @@ function MenuItemCard({ item }: { item: MenuItem }) {
     <div className="group flex flex-col gap-4 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-cream)] p-4 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-lg sm:flex-row sm:gap-5">
       <PhotoSlot
         imageId={item.imageId}
-        src={photoSources[item.imageId]}
+        src={photoAngles[item.imageId] ?? photoSources[item.imageId]}
         zoomOnHover
         className="w-full sm:w-36 sm:shrink-0"
       />

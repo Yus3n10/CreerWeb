@@ -1,7 +1,8 @@
 import { Container, Cta, Eyebrow } from "../components/ui";
 import { SectionDivider } from "../components/SectionDivider";
 import { Reveal } from "../components/Reveal";
-import { business, howToOrder, orderSteps } from "../data/site";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../components/ui/accordion";
+import { business, faq, howToOrder, orderSteps } from "../data/site";
 
 export function HowToOrder() {
   return (
@@ -70,6 +71,30 @@ export function HowToOrder() {
                 Order on Instagram
               </Cta>
             </div>
+          </Reveal>
+        </Container>
+      </section>
+
+      <SectionDivider fill="var(--color-cream-soft)" />
+
+      <section className="bg-[color:var(--color-cream-soft)] py-14 sm:py-20">
+        <Container className="max-w-2xl">
+          <Reveal>
+            <Eyebrow>Good to know</Eyebrow>
+            <h2>A few common questions.</h2>
+          </Reveal>
+
+          <Reveal delay={80} className="mt-8 rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-cream)] px-5 sm:px-6">
+            <Accordion type="single" collapsible>
+              {faq.map(({ question, answer }) => (
+                <AccordionItem key={question} value={question} className="border-[color:var(--color-border)]">
+                  <AccordionTrigger className="text-base font-medium text-[color:var(--color-sage-deep)]">
+                    {question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-[color:var(--color-cocoa)]">{answer}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </Reveal>
         </Container>
       </section>

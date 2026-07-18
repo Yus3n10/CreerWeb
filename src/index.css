@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 /*
   One typeface, used deliberately: Fraunces is a variable serif with a wide
   optical-size + weight range, so headings (high opsz, heavier weight) and
   body copy (low opsz, regular weight) come from the same family instead of
-  stacking multiple fonts.
+  stacking multiple fonts. shadcn/ui components below read colors and font
+  through the semantic tokens in :root, so they inherit this palette
+  automatically instead of shadcn's own defaults.
 */
 
 @theme {
@@ -18,16 +24,17 @@
   --color-rose: #c9a2a0;
   --color-cocoa: #5b4636;
   --color-taupe: #8c7c68;
-  --color-border: #e4dcc8;
 }
 
 @layer base {
   * {
     box-sizing: border-box;
+    @apply border-border outline-ring/50;
   }
 
   html {
     scroll-behavior: smooth;
+    @apply font-sans;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -46,13 +53,11 @@
 
   body {
     margin: 0;
-    background-color: var(--color-cream);
-    color: var(--color-cocoa);
-    font-family: var(--font-sans);
     font-optical-sizing: auto;
     font-size: 17px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    @apply bg-background text-foreground;
   }
 
   h1,
@@ -142,4 +147,58 @@
   .animate-ken-burns {
     animation: ken-burns 14s ease-in-out infinite;
   }
+}
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+/*
+  shadcn's semantic tokens, mapped to Creer's own palette instead of the
+  default gray/oklch theme — every shadcn component (Tabs, Accordion,
+  Dialog, etc.) reads colors through these, so nothing new introduces an
+  off-brand color. No .dark variant: this site doesn't have a dark mode.
+*/
+:root {
+  --background: #f6f1e7; /* cream */
+  --foreground: #5b4636; /* cocoa */
+  --card: #efe8d8; /* cream-soft */
+  --card-foreground: #5b4636;
+  --popover: #efe8d8;
+  --popover-foreground: #5b4636;
+  --primary: #4b5540; /* sage-deep */
+  --primary-foreground: #f6f1e7;
+  --secondary: #efe8d8;
+  --secondary-foreground: #4b5540;
+  --muted: #efe8d8;
+  --muted-foreground: #8c7c68; /* taupe */
+  --accent: #c9a2a0; /* rose */
+  --accent-foreground: #5b4636;
+  --destructive: #a13d3d;
+  --border: #e4dcc8;
+  --input: #e4dcc8;
+  --ring: #4b5540;
+  --radius: 0.75rem;
 }

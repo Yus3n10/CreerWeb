@@ -121,6 +121,33 @@ export const howToOrder = {
   },
 };
 
+export const faq = [
+  {
+    question: "Can I customize my order?",
+    answer:
+      "Yes — flavors, sizes, and add-ons are worked out over DM when you order. Brownies have a small customization fee, and chunky cookies scale in price with size.",
+  },
+  {
+    question: "How far in advance should I order?",
+    answer:
+      "Everything is baked to order on a weekly pre-order window — orders typically close Wednesday for Friday pickup. Message early, especially around holidays, since slots fill up.",
+  },
+  {
+    question: "Is delivery available, or pickup only?",
+    answer:
+      "Both. Pickup is from a set meetup spot, usually Fridays. Delivery is quoted based on distance — share your address when you order and we'll confirm the fee.",
+  },
+  {
+    question: "How do I pay?",
+    answer: "Payment details are worked out over DM once your order is confirmed.",
+  },
+  {
+    question: "Can I place an order without Instagram?",
+    answer:
+      "Instagram DM is currently the only way to order — it's the fastest way to confirm flavors, quantities, and timing back and forth. General questions can go through the contact form instead.",
+  },
+];
+
 export const contact = {
   eyebrow: "Say hello",
   heading: "Let's talk cookies.",
